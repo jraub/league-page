@@ -83,5 +83,5 @@
 	<span class="copyright">&copy; 2021 - {year} League Page</span>
 	<br />
 	<!-- PLEASE DO NOT REMOVE -->
-	<span class="creator">Built by JRaub<br /></span>
+	<span class="creator">Built by Jraub (originally developed by <a href="http://www.nmelhado.com/">Nicholas Melhado</a>)<br /></span>
 </footer>

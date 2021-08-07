@@ -80,8 +80,9 @@
 			{/each}
 		</ul>
 	</div>
-	<span class="copyright">&copy; 2021 - {year} League Page</span>
+	<!-- PLEASE DO NOT REMOVE THE COPYRIGHT -->
+	<span class="copyright">&copy; 2021 - {year} <a href="https://github.com/nmelhado/league-page">League Page</a></span>
 	<br />
 	<!-- PLEASE DO NOT REMOVE -->
-	<span class="creator">Built by JRaub<br /></span>
+	<span class="creator">Built by JRaub - originally by <a href="http://www.nmelhado.com/">Nicholas Melhado</a><br /></span>
 </footer>

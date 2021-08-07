@@ -84,5 +84,5 @@
 	<span class="copyright">&copy; 2021 - {year} <a href="https://github.com/nmelhado/league-page">League Page</a></span>
 	<br />
 	<!-- PLEASE DO NOT REMOVE -->
-	<span class="creator">Built by JRaub - originally by <a href="http://www.nmelhado.com/">Nicholas Melhado</a><br /></span>
+	<span class="creator">Built by Jraub (originally developed by <a href="http://www.nmelhado.com/">Nicholas Melhado</a>)<br /></span>
 </footer>

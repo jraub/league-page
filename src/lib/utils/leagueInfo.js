@@ -6,12 +6,7 @@ export const dynasty = true; // true for dynasty leagues, false for redraft and 
 
 /*   STEP 2   */
 export const homepageText = `
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p>The Longest Yard 2.0 dynasty league was founded in 2021 by Jonathan Dykes and Joshua Raub.</p>
 `;
 
 /*   STEP 3   */
@@ -24,101 +19,236 @@ https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#2-add-man
 // To omit an optional field, set it's value to null
 
 export const managers = [
-    // {
-    //   "roster": 1,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
-    //   "name": "Your Name",
-    //   "tookOver": 2020, // (optional) used if a manager took over a team, delete this line or change to null otherwise
-    //   "location": "Brooklyn", // (optional)
-    //   "bio": "Lorem ipsum...",
-    //   "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
-    //   "fantasyStart": 2014, // (optional) when did the manager start playing fantasy football
-    //   "favoriteTeam": "nyj", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
-    //   "mode": "Win Now", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
-    //   "rival": {
-    //     name: "Rival", // Can be anything (usually your rival's name)
-    //     link: 6, // manager array number within this array, or null to link back to all managers page
-    //     image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
-    //   },
-    //   "favoritePlayer": 1426, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
-    //   "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
-    //   "rookieOrVets": "Rookies", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
-    //   "philosophy": "Your fantasy team's philosophy",
-    //   "tradingScale": 10, // 1 - 10
-    //   "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
-    // },
-    // {
-    //   "roster": 2,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
-    //   "name": "Your Name",
-    //   "tookOver": 2020, // (optional) used if a manager took over a team, delete this line or change to null otherwise
-    //   "location": "Brooklyn", // (optional)
-    //   "bio": "Lorem ipsum...",
-    //   "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
-    //   "fantasyStart": 2014, // (optional) when did the manager start playing fantasy football
-    //   "favoriteTeam": "nyj", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
-    //   "mode": "Win Now", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
-    //   "rival": {
-    //     name: "Rival", // Can be anything (usually your rival's name)
-    //     link: 6, // manager array number within this array, or null to link back to all managers page
-    //     image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
-    //   },
-    //   "favoritePlayer": 1426, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
-    //   "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
-    //   "rookieOrVets": "Rookies", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
-    //   "philosophy": "Your fantasy team's philosophy",
-    //   "tradingScale": 10, // 1 - 10
-    //   "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
-    // },
-    // {
-    //   "roster": 3,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
-    //   "name": "Your Name",
-    //   "tookOver": 2020, // (optional) used if a manager took over a team, delete this line or change to null otherwise
-    //   "location": "Brooklyn", // (optional)
-    //   "bio": "Lorem ipsum...",
-    //   "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
-    //   "fantasyStart": 2014, // (optional) when did the manager start playing fantasy football
-    //   "favoriteTeam": "nyj", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
-    //   "mode": "Win Now", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
-    //   "rival": {
-    //     name: "Rival", // Can be anything (usually your rival's name)
-    //     link: 6, // manager array number within this array, or null to link back to all managers page
-    //     image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
-    //   },
-    //   "favoritePlayer": 1426, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
-    //   "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
-    //   "rookieOrVets": "Rookies", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
-    //   "philosophy": "Your fantasy team's philosophy",
-    //   "tradingScale": 10, // 1 - 10
-    //   "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
-    // },
-  ]
-  
-  
-  /*   !!  !!  IMPORTANT  !!  !! */
-  /*
+  {
+    roster: 1,
+    name: "Joshua Raub",
+    location: "Raleigh, NC",
+    bio: "Co-Commish.",
+    photo: "/managers/jraub_headshot.png",
+    fantasyStart: 2016,
+    favoriteTeam: "buf",
+    mode: "Win Now",
+    rival: {
+      name: "Rival",
+      link: 1,
+      image: "/managers/silhouette.png",
+    },
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 3,
+    name: "John Dykes",
+    location: "Wilmington, NC",
+    bio: "Co-Commish.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "buf",
+    mode: "Win Now",
+    rival: {
+      name: "Rival",
+      link: 0,
+      image: "/managers/jraub_headshot.png",
+    },
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 2,
+    name: "Bryce Beechler",
+    location: "Rochester, NY",
+    bio: "A real salt of the earth guy.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "buf",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 4,
+    name: "nuwolf76",
+    location: "Unknown",
+    bio: "Some sort of bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "nyj",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 5,
+    name: "Aaron Schuldt",
+    location: "Charlotte, NC",
+    bio: "A dude and a guy.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "ne",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 6,
+    name: "Steve Something",
+    location: "Somewhere, NC",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "ne",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 7,
+    name: "Coach",
+    location: "Somewhere",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "ne",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 8,
+    name: "Motherfaulker",
+    location: "Somewhere",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "ne",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 9,
+    name: "Alex Crumb",
+    location: "Rochester, NY",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "buf",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 10,
+    name: "Matt Cherry",
+    location: "Space",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "ari",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 11,
+    name: "Matt Garcia",
+    location: "Rochester, NY",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "buf",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+  {
+    roster: 12,
+    name: "Jonathan Raub",
+    location: "Rochester, NY",
+    bio: "Some bio.",
+    photo: "/managers/silhouette.png",
+    fantasyStart: 2016,
+    favoriteTeam: "cin",
+    mode: "Win Now",
+    favoritePlayer: 1426,
+    valuePosition: "WR",
+    rookieOrVets: "Rookies",
+    philosophy: "Go big or go home",
+    tradingScale: 10,
+    preferredContact: "Sleeper",
+  },
+];
+
+/*   !!  !!  IMPORTANT  !!  !! */
+/*
   Below is the most up to-date version of a manager. Please leave this commented out
   and don't delete it. This will be updated if any fields are added, removed or changed
   and will allow updates without causing merge conflicts
   */
-  
-    // {
-    //   "roster": 3,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
-    //   "name": "Your Name",
-    //   "tookOver": 2020, // (optional) used if a manager took over a team, delete this line or change to null otherwise
-    //   "location": "Brooklyn", // (optional)
-    //   "bio": "Lorem ipsum...",
-    //   "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
-    //   "fantasyStart": 2014, // (optional) when did the manager start playing fantasy football
-    //   "favoriteTeam": "nyj", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
-    //   "mode": "Win Now", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
-    //   "rival": {
-    //     name: "Rival", // Can be anything (usually your rival's name)
-    //     link: 6, // manager array number within this array, or null to link back to all managers page
-    //     image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
-    //   },
-    //   "favoritePlayer": 1426, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
-    //   "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
-    //   "rookieOrVets": "Rookies", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
-    //   "philosophy": "Your fantasy team's philosophy",
-    //   "tradingScale": 10, // 1 - 10
-    //   "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
-    // },
+
+// {
+//   "roster": 3,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
+//   "name": "Your Name",
+//   "tookOver": 2020, // (optional) used if a manager took over a team, delete this line or change to null otherwise
+//   "location": "Brooklyn", // (optional)
+//   "bio": "Lorem ipsum...",
+//   "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
+//   "fantasyStart": 2014, // (optional) when did the manager start playing fantasy football
+//   "favoriteTeam": "nyj", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
+//   "mode": "Win Now", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
+//   "rival": {
+//     name: "Rival", // Can be anything (usually your rival's name)
+//     link: 6, // manager array number within this array, or null to link back to all managers page
+//     image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
+//   },
+//   "favoritePlayer": 1426, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
+//   "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
+//   "rookieOrVets": "Rookies", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
+//   "philosophy": "Your fantasy team's philosophy",
+//   "tradingScale": 10, // 1 - 10
+//   "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
+// },

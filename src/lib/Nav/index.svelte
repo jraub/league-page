@@ -14,7 +14,7 @@
 	let lightTheme =
 		typeof window === "undefined" ||
 		window.matchMedia("(prefers-color-scheme: light)").matches;
-	
+
 	function switchTheme() {
 		lightTheme = !lightTheme;
 		let themeLink = document.head.querySelector("#theme");
@@ -86,7 +86,7 @@
 <nav>
 	<a href="/"><img id="logo" alt="league logo" src="./badge.png" /></a>
 
-	<div class="container">
+	<div class="container" style="display: none">
 		<IconButton
 			toggle
 			pressed={lightTheme}

@@ -1,3 +1,6 @@
+import { managers } from '$lib/utils/leagueInfo';
+import { goto } from "$app/navigation";
+
 export const cleanName = (name) => {
     return name.replace('Team ', '').toLowerCase().replace(/[ ’'!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
 }
@@ -14,6 +17,14 @@ const min = (stats, roundOverride) => {
 const max = (stats, roundOverride) => {
     const num = Math.max(...stats)
     return Math.ceil(num / roundOverride) * roundOverride;
+}
+
+export const gotoManager = (rosterID) => {
+    console.log(rosterID);
+    if(!managers.length) return;
+    const managersIndex = managers.findIndex(m => m.roster == rosterID);
+    // if no manager exists for that roster, -1 will take you to the main managers page
+    goto(`/managers?manager=${managersIndex}`);
 }
 
 export const generateGraph = ({stats, x, y, stat, header, field, short, secondField = null}, roundOverride = 10, yMinOverride = null) => {

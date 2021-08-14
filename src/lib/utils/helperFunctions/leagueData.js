@@ -1,10 +1,6 @@
 import { get } from 'svelte/store';
 import {leagueData} from '$lib/stores';
-
-export const leagueID = "674833906184290304"; // your league ID
-export const leagueName = "The Longest Yard 2.0"; // your league name
-export const dues = 25; // (optional) used in template constitution page
-export const dynasty = true; // true for dynasty leagues, false for redraft and keeper
+import { leagueID } from '$lib/utils/leagueInfo';
 
 export const getLeagueData = async (queryLeagueID = leagueID) => {
 	if(get(leagueData)[queryLeagueID]) {

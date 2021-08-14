@@ -1,11 +1,8 @@
 <script>
 	import LinearProgress from '@smui/linear-progress';
-	import { getNflState, cleanName, leagueName } from '$lib/utils/helper';
+	import { getNflState, cleanName, leagueName, homepageText, managers, gotoManager } from '$lib/utils/helper';
 	import { Transactions, PowerRankings} from '$lib/components';
     import { getAwards } from "$lib/utils/helper"
-    import { rosterManagers } from '$lib/utils/rosterManagers';
-    import { goto } from '$app/navigation';
-    import { managers } from './managers/managers';
 
     let nflState = getNflState();
     let podiumsData = getAwards();
@@ -60,9 +57,9 @@
         min-width: 470px;
         max-width: 470px;
         min-height: 100%;
-        background-color: #ebebeb;
-        border-left: #eee;
-		box-shadow: inset 0px 3px 3px -2px rgb(0 0 0 / 20%), inset 0px 3px 4px 0px rgb(0 0 0 / 14%), inset 0px 1px 8px 0px rgb(0 0 0 / 12%);
+		background-color: var(--ebebeb);
+        border-left: var(--eee);
+		box-shadow: inset 0px 3px 3px -2px rgb(0 0 0 / 40%), inset 0px 3px 4px 0px rgb(0 0 0 / 28%), inset 0px 1px 8px 0px rgb(0 0 0 / 24%);
     }
 
     @media (max-width: 950px) {
@@ -93,10 +90,9 @@
     /* champ styling */
     #currentChamp {
         padding: 25px 0;
-        box-shadow: 0 0 8px 0 #777;
-        background-color: #f3f3f3;
-        box-shadow: 0 -8px 8px -8px #555, 0 8px 8px -8px #555;
-        border-left: 1px solid #ccc;
+		background-color: var(--f3f3f3);
+        box-shadow: 5px 0 8px var(--champShadow);
+        border-left: 1px solid var(--ddd);
     }
 
     #champ {
@@ -138,7 +134,7 @@
         text-align: center;
         line-height: 1.1em;
         padding: 6px 20px;
-        background-color: #fff;
+        background-color: var(--fff);
         border: 1px solid #aaa;
         margin: 10px auto 0;
         cursor: pointer;
@@ -155,12 +151,8 @@
     <div id="main">
         <div class="text">
             <h6>{leagueName}</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <!-- homepageText contains the intro text for your league, this gets edited in /src/lib/utils/leagueInfo.js -->
+            {@html homepageText }
         </div>
         <PowerRankings />
     </div>
@@ -184,11 +176,11 @@
             {:then {podiums, currentManagers}}
                 {#if podiums[0]}
                     <h4>{podiums[0].year} Champ</h4>
-                    <div id="champ" on:click={() => {if(managers.length) goto(`/managers?manager=${rosterManagers[parseInt(podiums[0].champion.rosterID)]}`)}} >
+                    <div id="champ" on:click={() => {if(managers.length) gotoManager(parseInt(podiums[0].champion.rosterID))}} >
                         <img src="{podiums[0].champion.avatar}" class="first" alt="champion" />
                         <img src="./laurel.png" class="laurel" alt="laurel" />
                     </div>
-                    <span class="label" on:click={() => goto(`/managers?manager=${rosterManagers[parseInt(podiums[0].champion.rosterID)]}`)} >{@html getNames(podiums[0].champion.name, podiums[0].champion.rosterID, currentManagers)}</span>
+                    <span class="label" on:click={() => gotoManager(parseInt(podiums[0].champion.rosterID))} >{@html getNames(podiums[0].champion.name, podiums[0].champion.rosterID, currentManagers)}</span>
                 {:else}
                     <p class="center">No former champs.</p>
                 {/if}

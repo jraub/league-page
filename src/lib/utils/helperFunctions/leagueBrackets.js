@@ -1,4 +1,5 @@
-import { getLeagueData, leagueID } from './leagueData';
+import { getLeagueData } from './leagueData';
+import { leagueID } from '$lib/utils/leagueInfo';
 import { getLeagueRosters } from './leagueRosters';
 import { getLeagueUsers } from './leagueUsers';
 import {waitForAll} from './multiPromise';
@@ -6,7 +7,7 @@ import { get } from 'svelte/store';
 import {brackets} from '$lib/stores';
 
 export const getBrackets = async () => {
-	if(get(brackets).champions) {
+	if(get(brackets).champs) {
 		return get(brackets);
 	}
 

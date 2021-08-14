@@ -23,7 +23,7 @@
 
 <style>
 	footer {
-		background-color: #f8f8f8;
+		background-color: var(--f8f8f8);
 		width: 100%;
         display: block;
         position: absolute;

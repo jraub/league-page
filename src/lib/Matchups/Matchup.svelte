@@ -105,6 +105,7 @@
         opacity: 0.8;
         cursor: pointer;
 		transition: opacity 0.5s;
+        overflow: hidden;
     }
 
     .header:hover {
@@ -226,7 +227,7 @@
 
     .rosters {
         position: relative;
-        background-color: #fff;
+        background-color: var(--fff);
         border-radius: 8px;
         overflow: hidden;
         border-left: 1px solid #bbb;
@@ -341,14 +342,14 @@
         left: 50%;
         height: 100%;
         width: 0;
-        border-left: 1px solid #eee;
+        border-left: 1px solid var(--eee);
         z-index: 1;
     }
 
     .close {
         display: block;
         width: 100%;
-        background-color: #eee;
+        background-color: var(--eee);
         text-align: center;
         cursor: pointer;
         z-index: 2;
@@ -357,7 +358,7 @@
     }
 
     .close:hover {
-        background-color: #ddd;
+        background-color: var(--ddd);
     }
 
     .nameHolder {

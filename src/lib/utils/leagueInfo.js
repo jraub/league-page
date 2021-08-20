@@ -6,7 +6,7 @@ export const dynasty = true; // true for dynasty leagues, false for redraft and 
 
 /*   STEP 2   */
 export const homepageText = `
-  <p>The Longest Yard 2.0 dynasty league was founded in 2021 by Jonathan Dykes and Joshua Raub.</p>
+  <p>The Longest Yard 2.0 dynasty league was founded in 2021 by Josh Raub and John Dykes.</p>
 `;
 
 /*   STEP 3   */

@@ -28,11 +28,6 @@ export const managers = [
     fantasyStart: 2016,
     favoriteTeam: "buf",
     mode: "Win Now",
-    rival: {
-      name: "Rival",
-      link: 1,
-      image: "/managers/silhouette.png",
-    },
     favoritePlayer: 1426,
     valuePosition: "WR",
     rookieOrVets: "Rookies",
@@ -49,11 +44,6 @@ export const managers = [
     fantasyStart: 2016,
     favoriteTeam: "buf",
     mode: "Win Now",
-    rival: {
-      name: "Rival",
-      link: 0,
-      image: "/managers/jraub_headshot.png",
-    },
     favoritePlayer: 1426,
     valuePosition: "WR",
     rookieOrVets: "Rookies",

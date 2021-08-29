@@ -626,9 +626,11 @@
       their team.
     </li>
     <li>
-      Waivers are closed on Tuesdays, and players who have already played during
-      a given NFL week are locked and cannot be added during that week (until
-      the Wednesday waivers following that NFL week, essentially).
+      Waivers will be processed every day other than Thursdays and Sundays. On
+      Thursdays and Sundays, waivers will be unlocked, and eligible free agents
+      can be claimed without delay. This schedule will allow managers to make
+      last-minute roster adjustments before games start. A player is considered
+      a free agent two days after he is dropped (after being held for 24 hours).
     </li>
     <li>
       Bids may only be submitted if processing would result in a valid roster
@@ -646,9 +648,14 @@
     </ul>
     <li>Bids for $0.00 shall be permitted.</li>
     <li>
-      Ties on bids shall be resolved by waiver priority, which is
-      determined/reset weekly based on inverse order of standings (preliminary
-      playoff seeding).
+      If two or more teams bid the same amount, the tiebreaker comes down to
+      waiver wire priority, which acts as rolling waivers. The waiver priority
+      starts based on the draft order. So the team with the 1st overall pick
+      would have the worst priority and the team that drafted last would have
+      the best. If you successfully claim a player through waivers at any time,
+      you go to the end of the list, while everybody else moves up by one. If
+      you make any free agent acquisitions, it will not affect this priority
+      order. The waiver wire priority can be found in our league's standings.
     </li>
     <li>
       There is no limit on the number of moves/transactions/pickups which an

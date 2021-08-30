@@ -30,8 +30,8 @@
 		<LinearProgress indeterminate />
 	</div>
 {:then upcomingDraft }
-    <h4>Upcoming {upcomingDraft.year} Draft</h4>
-    <Draft draftData={upcomingDraft} />
+    <!-- <h4>Upcoming {upcomingDraft.year} Draft</h4> -->
+    <!-- <Draft draftData={upcomingDraft} /> -->
 {:catch error}
 	<!-- promise was rejected -->
 	<p>Something went wrong: {error.message}</p>

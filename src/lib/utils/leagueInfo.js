@@ -21,7 +21,7 @@ https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#2-add-man
 export const managers = [
   {
     roster: 1,
-    name: "Joshua Raub",
+    name: "Josh Raub",
     location: "Raleigh, NC",
     bio: "Co-Commish.",
     photo: "/managers/jraub_headshot.png",
@@ -87,7 +87,7 @@ export const managers = [
     roster: 5,
     name: "Aaron Schuldt",
     location: "Charlotte, NC",
-    bio: "A dude and a guy.",
+    bio: "Some bio.",
     photo: "/managers/silhouette.png",
     fantasyStart: 2016,
     favoriteTeam: "ne",
@@ -165,8 +165,8 @@ export const managers = [
   },
   {
     roster: 10,
-    name: "Matt Cherry",
-    location: "Space",
+    name: "Michael Cherry",
+    location: "Somewhere",
     bio: "Some bio.",
     photo: "/managers/silhouette.png",
     fantasyStart: 2016,

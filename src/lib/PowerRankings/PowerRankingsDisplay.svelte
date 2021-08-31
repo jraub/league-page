@@ -1,110 +1,119 @@
 <script>
-    import BarChart from '$lib/BarChart.svelte';
-    import { generateGraph, round, predictScores } from '$lib/utils/helper';
-    export let nflState, rostersData, users, players, leagueData;
+  import BarChart from "$lib/BarChart.svelte";
+  import {
+    generateGraph,
+    round,
+    predictScores,
+    loadRankings,
+    managers,
+  } from "$lib/utils/helper";
+  export let nflState, rostersData, users, players, leagueData;
 
-    const rosters = rostersData.rosters;
+  let week = nflState.week;
+  if (week == 0) {
+    week = 1;
+  }
 
-    const currentManagers = {};
+  const rosters = rostersData.rosters;
+  const currentManagers = {};
 
-    for(const roster of rosters) {
-        const user = users[roster.owner_id];
-        currentManagers[roster.roster_id] = {
-            avatar: `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
-            name: user.metadata.team_name ? user.metadata.team_name : user.display_name,
-        }
-    }
+  for (const roster of rosters) {
+    const user = users[roster.owner_id];
+    currentManagers[roster.roster_id] = {
+      avatar: `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
+      name: user.metadata.team_name
+        ? user.metadata.team_name
+        : user.display_name,
+    };
+  }
 
-    let week = nflState.week;
-    if(week == 0) {
-        week = 1;
-    }
-    
-    const rosterPowers = [];
+  const fprosWeeklyPower = loadRankings(week);
+  let weeklyRankingData = {};
 
-    let max = 0;
+  // Add fantasypros weekly data to our array
+  fprosWeeklyPower.then((data) => {
+    weeklyRankingData = doWork(data, weeklyRankingData);
+  });
 
-    let validGraph = false;
+  const rosterPowers = [];
 
-    for(const roster of rosters) {
-        // make sure the roster has players on it
-        if(!roster.players) continue;
-        // if at least one team has players, create the graph
-        validGraph = true;
+  let validGraph = false;
 
-        const rosterPlayers = [];
+  for (const roster of rosters) {
+    // make sure the roster has players on it
+    if (!roster.players) continue;
+    // if at least one team has players, create the graph
+    validGraph = true;
 
-        for(const rosterPlayer of roster.players) {
-            rosterPlayers.push({
-                name: players[rosterPlayer].last_name,
-                position: players[rosterPlayer].position,
-                weeklyInfo: players[rosterPlayer].weeklyInfo
-            })
-        }
-
-        const rosterPower = {
-            rosterID: roster.roster_id,
-            manager: currentManagers[roster.roster_id],
-            powerScore: 0,
-        }
-        const seasonEnd = Object.keys(rosterPlayers[0].weeklyInfo).length || 18;
-        for(let i = week; i < seasonEnd; i++) {
-            rosterPower.powerScore += predictScores(rosterPlayers, i, leagueData);
-        }
-        if(rosterPower.powerScore > max) {
-            max = rosterPower.powerScore;
-        }
-        rosterPowers.push(rosterPower);
-    }
-
-    for(const rosterPower of rosterPowers) {
-        rosterPower.powerScore = round(rosterPower.powerScore/max * 100);
-    }
-
-    const powerGraph = {
-        stats: rosterPowers,
-        x: "Manager",
-        y: "Power Ranking",
-        stat: "",
-        header: "Rest of Season Power Rankings",
-        field: "powerScore",
-        short: "ROS Power Ranking"
+    let managerName = currentManagers[roster.roster_id].name;
+    console.log(weeklyRankingData);
+    console.log(Object.keys(weeklyRankingData));
+    const rosterPower = {
+      rosterID: roster.roster_id,
+      manager: currentManagers[roster.roster_id],
+      powerScore: weeklyRankingData[managerName].WeeklyPower,
     };
 
-    const graphs = [
-        generateGraph(powerGraph, 10)
-    ]
+    rosterPowers.push(rosterPower);
+  }
 
-    let curGraph = 0;
-
-    let el;
-    let maxWidth = 620;
-
-
-    const resize = (w) => {
-        const left = el?.getBoundingClientRect() ? el?.getBoundingClientRect().left  : 0;
-        const right = el?.getBoundingClientRect() ? el?.getBoundingClientRect().right  : 0;
-
-        maxWidth = right - left;
+  function doWork(players) {
+    let theObject = {};
+    for (var i = 0; i < players.length; i++) {
+      let jsonData = { WeeklyPower: players[i].Score };
+      let managerName = players[i].Team;
+      theObject[managerName] = jsonData;
     }
-    let innerWidth;
 
-    $: resize(innerWidth);
+    return theObject;
+  }
 
+  console.log(rosterPowers);
+
+  const powerGraph = {
+    stats: rosterPowers,
+    x: "Manager",
+    y: "Power Ranking",
+    stat: "",
+    header: "Weekly Power Rankings",
+    field: "powerScore",
+    short: "Week Power Ranking",
+  };
+
+  const graphs = [generateGraph(powerGraph, 10)];
+
+  let curGraph = 0;
+
+  let el;
+  let maxWidth = 620;
+
+  const resize = (w) => {
+    const left = el?.getBoundingClientRect()
+      ? el?.getBoundingClientRect().left
+      : 0;
+    const right = el?.getBoundingClientRect()
+      ? el?.getBoundingClientRect().right
+      : 0;
+
+    maxWidth = right - left;
+  };
+  let innerWidth;
+
+  $: resize(innerWidth);
 </script>
 
-<svelte:window bind:innerWidth={innerWidth} />
-
-<style>
-    .enclosure {
-        display: block;
-        position: relative;
-        width: 100%;
-    }
-</style>
+<svelte:window bind:innerWidth />
 
 {#if validGraph}
-    <div class="enclosure" bind:this={el}>
-        <BarChart {maxWidth} {graphs} bind:curGraph={curGraph} />
-    </div>
+  <div class="enclosure" bind:this={el}>
+    <BarChart {maxWidth} {graphs} bind:curGraph />
+  </div>
 {/if}
+
+<style>
+  .enclosure {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+</style>

@@ -1,10 +1,11 @@
 <script>
   import BarChart from "$lib/BarChart.svelte";
+  import weeklyRankings from "/static/rankings/weekly_power.json";
+  import dynastyRankings from "/static/rankings/dynasty_power.json";
   import {
     generateGraph,
     round,
     predictScores,
-    loadRankings,
     managers,
   } from "$lib/utils/helper";
   export let nflState, rostersData, users, players, leagueData;
@@ -27,15 +28,26 @@
     };
   }
 
-  const fprosWeeklyPower = loadRankings(week);
-  let weeklyRankingData = {};
+  const fprosWeeklyPower = weeklyRankings;
+  const fprosDynastyPower = dynastyRankings;
+  let rankingData = {};
 
-  // Add fantasypros weekly data to our array
-  fprosWeeklyPower.then((data) => {
-    weeklyRankingData = doWork(data, weeklyRankingData);
-  });
+  // Sort our lists here so that we can hack later
+  fprosWeeklyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
+  fprosDynastyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
 
-  const rosterPowers = [];
+  // Loop through this and put all of our data in the correct spot
+  for (let i = 0; i < fprosWeeklyPower.length; i++) {
+    let jsonData = {
+      WeeklyPower: fprosWeeklyPower[i].Score,
+      DynastyPower: fprosDynastyPower[i].Score,
+    };
+    let managerName = fprosDynastyPower[i].Team;
+    rankingData[managerName] = jsonData;
+  }
+
+  const weeklyRosterPowers = [];
+  const dynastyRosterPowers = [];
 
   let validGraph = false;
 
@@ -46,41 +58,51 @@
     validGraph = true;
 
     let managerName = currentManagers[roster.roster_id].name;
-    console.log(weeklyRankingData);
-    console.log(Object.keys(weeklyRankingData));
-    const rosterPower = {
+    let weeklyPowerScore = rankingData[managerName.trim()].WeeklyPower;
+    let dynastyPowerScore = rankingData[managerName.trim()].DynastyPower;
+
+    const weeklyPowers = {
       rosterID: roster.roster_id,
       manager: currentManagers[roster.roster_id],
-      powerScore: weeklyRankingData[managerName].WeeklyPower,
+      powerScore: weeklyPowerScore,
     };
 
-    rosterPowers.push(rosterPower);
+    const dynastyPowers = {
+      rosterID: roster.roster_id,
+      manager: currentManagers[roster.roster_id],
+      powerScore: dynastyPowerScore,
+    };
+
+    weeklyRosterPowers.push(weeklyPowers);
+    dynastyRosterPowers.push(dynastyPowers);
   }
 
-  function doWork(players) {
-    let theObject = {};
-    for (var i = 0; i < players.length; i++) {
-      let jsonData = { WeeklyPower: players[i].Score };
-      let managerName = players[i].Team;
-      theObject[managerName] = jsonData;
-    }
-
-    return theObject;
-  }
-
-  console.log(rosterPowers);
-
-  const powerGraph = {
-    stats: rosterPowers,
+  let weeklyHeader = "FPros Week " + week + " Power Rankings";
+  const weeklyPowerGraph = {
+    stats: weeklyRosterPowers,
     x: "Manager",
     y: "Power Ranking",
     stat: "",
-    header: "Weekly Power Rankings",
+    header: weeklyHeader,
     field: "powerScore",
     short: "Week Power Ranking",
   };
 
-  const graphs = [generateGraph(powerGraph, 10)];
+  let dynastyHeader = "Fpros Dynasty Power Rankings";
+  const dynastyPowerGraph = {
+    stats: dynastyRosterPowers,
+    x: "Manager",
+    y: "Power Ranking",
+    stat: "",
+    header: dynastyHeader,
+    field: "powerScore",
+    short: "Dynasty Power Ranking",
+  };
+
+  const graphs = [
+    generateGraph(weeklyPowerGraph, 10),
+    generateGraph(dynastyPowerGraph, 10),
+  ];
 
   let curGraph = 0;
 

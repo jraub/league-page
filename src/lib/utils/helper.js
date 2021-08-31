@@ -14,7 +14,6 @@ import { getAwards } from './helperFunctions/leagueAwards'
 import { cleanName, round, generateGraph, gotoManager } from './helperFunctions/universalFunctions';
 import { predictScores } from './helperFunctions/predictOptimalScore';
 import { getBrackets } from './helperFunctions/leagueBrackets';
-import { loadRankings } from './helperFunctions/powerRankings';
 
 export {
     homepageText,
@@ -41,6 +40,5 @@ export {
     getAwards,
     getBrackets,
     generateGraph,
-    predictScores,
-    loadRankings
+    predictScores
 }

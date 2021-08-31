@@ -88,7 +88,7 @@
     short: "Week Power Ranking",
   };
 
-  let dynastyHeader = "Fpros Dynasty Power Rankings";
+  let dynastyHeader = "FPros Dynasty Power Rankings";
   const dynastyPowerGraph = {
     stats: dynastyRosterPowers,
     x: "Manager",

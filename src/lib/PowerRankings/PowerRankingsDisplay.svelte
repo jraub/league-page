@@ -1,110 +1,141 @@
 <script>
-    import BarChart from '$lib/BarChart.svelte';
-    import { generateGraph, round, predictScores } from '$lib/utils/helper';
-    export let nflState, rostersData, users, players, leagueData;
+  import BarChart from "$lib/BarChart.svelte";
+  import weeklyRankings from "/static/rankings/weekly_power.json";
+  import dynastyRankings from "/static/rankings/dynasty_power.json";
+  import {
+    generateGraph,
+    round,
+    predictScores,
+    managers,
+  } from "$lib/utils/helper";
+  export let nflState, rostersData, users, players, leagueData;
 
-    const rosters = rostersData.rosters;
+  let week = nflState.week;
+  if (week == 0) {
+    week = 1;
+  }
 
-    const currentManagers = {};
+  const rosters = rostersData.rosters;
+  const currentManagers = {};
 
-    for(const roster of rosters) {
-        const user = users[roster.owner_id];
-        currentManagers[roster.roster_id] = {
-            avatar: `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
-            name: user.metadata.team_name ? user.metadata.team_name : user.display_name,
-        }
-    }
+  for (const roster of rosters) {
+    const user = users[roster.owner_id];
+    currentManagers[roster.roster_id] = {
+      avatar: `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
+      name: user.metadata.team_name
+        ? user.metadata.team_name
+        : user.display_name,
+    };
+  }
 
-    let week = nflState.week;
-    if(week == 0) {
-        week = 1;
-    }
-    
-    const rosterPowers = [];
+  const fprosWeeklyPower = weeklyRankings;
+  const fprosDynastyPower = dynastyRankings;
+  let rankingData = {};
 
-    let max = 0;
+  // Sort our lists here so that we can hack later
+  fprosWeeklyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
+  fprosDynastyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
 
-    let validGraph = false;
+  // Loop through this and put all of our data in the correct spot
+  for (let i = 0; i < fprosWeeklyPower.length; i++) {
+    let jsonData = {
+      WeeklyPower: fprosWeeklyPower[i].Score,
+      DynastyPower: fprosDynastyPower[i].Score,
+    };
+    let managerName = fprosDynastyPower[i].Team;
+    rankingData[managerName] = jsonData;
+  }
 
-    for(const roster of rosters) {
-        // make sure the roster has players on it
-        if(!roster.players) continue;
-        // if at least one team has players, create the graph
-        validGraph = true;
+  const weeklyRosterPowers = [];
+  const dynastyRosterPowers = [];
 
-        const rosterPlayers = [];
+  let validGraph = false;
 
-        for(const rosterPlayer of roster.players) {
-            rosterPlayers.push({
-                name: players[rosterPlayer].last_name,
-                position: players[rosterPlayer].position,
-                weeklyInfo: players[rosterPlayer].weeklyInfo
-            })
-        }
+  for (const roster of rosters) {
+    // make sure the roster has players on it
+    if (!roster.players) continue;
+    // if at least one team has players, create the graph
+    validGraph = true;
 
-        const rosterPower = {
-            rosterID: roster.roster_id,
-            manager: currentManagers[roster.roster_id],
-            powerScore: 0,
-        }
-        const seasonEnd = Object.keys(rosterPlayers[0].weeklyInfo).length || 18;
-        for(let i = week; i < seasonEnd; i++) {
-            rosterPower.powerScore += predictScores(rosterPlayers, i, leagueData);
-        }
-        if(rosterPower.powerScore > max) {
-            max = rosterPower.powerScore;
-        }
-        rosterPowers.push(rosterPower);
-    }
+    let managerName = currentManagers[roster.roster_id].name;
+    let weeklyPowerScore = rankingData[managerName.trim()].WeeklyPower;
+    let dynastyPowerScore = rankingData[managerName.trim()].DynastyPower;
 
-    for(const rosterPower of rosterPowers) {
-        rosterPower.powerScore = round(rosterPower.powerScore/max * 100);
-    }
-
-    const powerGraph = {
-        stats: rosterPowers,
-        x: "Manager",
-        y: "Power Ranking",
-        stat: "",
-        header: "Rest of Season Power Rankings",
-        field: "powerScore",
-        short: "ROS Power Ranking"
+    const weeklyPowers = {
+      rosterID: roster.roster_id,
+      manager: currentManagers[roster.roster_id],
+      powerScore: weeklyPowerScore,
     };
 
-    const graphs = [
-        generateGraph(powerGraph, 10)
-    ]
+    const dynastyPowers = {
+      rosterID: roster.roster_id,
+      manager: currentManagers[roster.roster_id],
+      powerScore: dynastyPowerScore,
+    };
 
-    let curGraph = 0;
+    weeklyRosterPowers.push(weeklyPowers);
+    dynastyRosterPowers.push(dynastyPowers);
+  }
 
-    let el;
-    let maxWidth = 620;
+  let weeklyHeader = "FPros Week " + week + " Power Rankings";
+  const weeklyPowerGraph = {
+    stats: weeklyRosterPowers,
+    x: "Manager",
+    y: "Power Ranking",
+    stat: "",
+    header: weeklyHeader,
+    field: "powerScore",
+    short: "Week Power Ranking",
+  };
 
+  let dynastyHeader = "Fpros Dynasty Power Rankings";
+  const dynastyPowerGraph = {
+    stats: dynastyRosterPowers,
+    x: "Manager",
+    y: "Power Ranking",
+    stat: "",
+    header: dynastyHeader,
+    field: "powerScore",
+    short: "Dynasty Power Ranking",
+  };
 
-    const resize = (w) => {
-        const left = el?.getBoundingClientRect() ? el?.getBoundingClientRect().left  : 0;
-        const right = el?.getBoundingClientRect() ? el?.getBoundingClientRect().right  : 0;
+  const graphs = [
+    generateGraph(weeklyPowerGraph, 10),
+    generateGraph(dynastyPowerGraph, 10),
+  ];
 
-        maxWidth = right - left;
-    }
-    let innerWidth;
+  let curGraph = 0;
 
-    $: resize(innerWidth);
+  let el;
+  let maxWidth = 620;
 
+  const resize = (w) => {
+    const left = el?.getBoundingClientRect()
+      ? el?.getBoundingClientRect().left
+      : 0;
+    const right = el?.getBoundingClientRect()
+      ? el?.getBoundingClientRect().right
+      : 0;
+
+    maxWidth = right - left;
+  };
+  let innerWidth;
+
+  $: resize(innerWidth);
 </script>
 
-<svelte:window bind:innerWidth={innerWidth} />
-
-<style>
-    .enclosure {
-        display: block;
-        position: relative;
-        width: 100%;
-    }
-</style>
+<svelte:window bind:innerWidth />
 
 {#if validGraph}
-    <div class="enclosure" bind:this={el}>
-        <BarChart {maxWidth} {graphs} bind:curGraph={curGraph} />
-    </div>
+  <div class="enclosure" bind:this={el}>
+    <BarChart {maxWidth} {graphs} bind:curGraph />
+  </div>
 {/if}
+
+<style>
+  .enclosure {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+</style>

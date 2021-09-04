@@ -2,7 +2,7 @@
   import BarChart from "$lib/BarChart.svelte";
   import weeklyRankings from "/static/rankings/weekly_power.json";
   import dynastyRankings from "/static/rankings/dynasty_power.json";
-  import seasonRankings from "/static/rankings/weekly_power.json";
+  import seasonRankings from "/static/rankings/season_power.json";
   import {
     generateGraph,
     round,
@@ -87,7 +87,7 @@
 
     weeklyRosterPowers.push(weeklyPowers);
     dynastyRosterPowers.push(dynastyPowers);
-    seasonRosterPowers.push(SeasonPowers);
+    seasonRosterPowers.push(seasonPowers);
   }
 
   let weeklyHeader = "FPros Week " + week + " Power Rankings";

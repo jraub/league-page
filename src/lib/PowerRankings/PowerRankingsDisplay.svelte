@@ -2,6 +2,7 @@
   import BarChart from "$lib/BarChart.svelte";
   import weeklyRankings from "/static/rankings/weekly_power.json";
   import dynastyRankings from "/static/rankings/dynasty_power.json";
+  import seasonRankings from "/static/rankings/weekly_power.json";
   import {
     generateGraph,
     round,
@@ -30,17 +31,20 @@
 
   const fprosWeeklyPower = weeklyRankings;
   const fprosDynastyPower = dynastyRankings;
+  const fprosSeasonPower = seasonRankings;
   let rankingData = {};
 
   // Sort our lists here so that we can hack later
   fprosWeeklyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
   fprosDynastyPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
+  fprosSeasonPower.sort((a, b) => (a.Team > b.Team ? 1 : -1));
 
   // Loop through this and put all of our data in the correct spot
   for (let i = 0; i < fprosWeeklyPower.length; i++) {
     let jsonData = {
       WeeklyPower: fprosWeeklyPower[i].Score,
       DynastyPower: fprosDynastyPower[i].Score,
+      SeasonPower: fprosSeasonPower[i].Score,
     };
     let managerName = fprosDynastyPower[i].Team;
     rankingData[managerName] = jsonData;
@@ -48,6 +52,7 @@
 
   const weeklyRosterPowers = [];
   const dynastyRosterPowers = [];
+  const seasonRosterPowers = [];
 
   let validGraph = false;
 
@@ -60,6 +65,7 @@
     let managerName = currentManagers[roster.roster_id].name;
     let weeklyPowerScore = rankingData[managerName.trim()].WeeklyPower;
     let dynastyPowerScore = rankingData[managerName.trim()].DynastyPower;
+    let seasonPowerScore = rankingData[managerName.trim()].SeasonPower;
 
     const weeklyPowers = {
       rosterID: roster.roster_id,
@@ -73,8 +79,15 @@
       powerScore: dynastyPowerScore,
     };
 
+    const seasonPowers = {
+      rosterID: roster.roster_id,
+      manager: currentManagers[roster.roster_id],
+      powerScore: seasonPowerScore,
+    };
+
     weeklyRosterPowers.push(weeklyPowers);
     dynastyRosterPowers.push(dynastyPowers);
+    seasonRosterPowers.push(SeasonPowers);
   }
 
   let weeklyHeader = "FPros Week " + week + " Power Rankings";
@@ -99,9 +112,21 @@
     short: "Dynasty Power Ranking",
   };
 
+  let seasonHeader = "FPros Rest of Season Rankings";
+  const seasonPowerGraph = {
+    stats: seasonRosterPowers,
+    x: "Manager",
+    y: "Power Ranking",
+    stat: "",
+    header: seasonHeader,
+    field: "powerScore",
+    short: "ROS Power Ranking",
+  };
+
   const graphs = [
     generateGraph(weeklyPowerGraph, 10),
     generateGraph(dynastyPowerGraph, 10),
+    generateGraph(seasonPowerGraph, 10),
   ];
 
   let curGraph = 0;

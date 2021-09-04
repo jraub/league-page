@@ -1,62 +1,62 @@
 [
   {
-    "Rank": 1,
+    "RK": 1.0,
     "Team": "Jonniegetsbuckets",
     "Score": 100
   },
   {
-    "Rank": 2,
+    "RK": 2.0,
     "Team": "Motherfaulker",
     "Score": 96
   },
   {
-    "Rank": 3,
+    "RK": 3.0,
     "Team": "Quon Solo",
-    "Score": 96
+    "Score": 95
   },
   {
-    "Rank": 4,
-    "Team": "nuwolf76",
-    "Score": 93
-  },
-  {
-    "Rank": 5,
+    "RK": 4.0,
     "Team": "Stats are for Losers",
     "Score": 92
   },
   {
-    "Rank": 6,
+    "RK": 5.0,
+    "Team": "nuwolf76",
+    "Score": 92
+  },
+  {
+    "RK": 6.0,
     "Team": "Hey Mr Wilsons!",
     "Score": 91
   },
   {
-    "Rank": 7,
+    "RK": 7.0,
     "Team": "Johnny Footballz",
-    "Score": 90
+    "Score": 91
   },
   {
-    "Rank": 8,
-    "Team": "Aschuldt",
-    "Score": 90
-  },
-  {
-    "Rank": 9,
+    "RK": 8.0,
     "Team": "The Golden Gods",
     "Score": 90
   },
   {
-    "Rank": 10,
+    "RK": 9.0,
+    "Team": "Kittles N Bits",
+    "Score": 90
+  },
+  {
+    "RK": 10.0,
     "Team": "Bishop Sycamore",
     "Score": 89
   },
   {
-    "Rank": 11,
-    "Team": "Pressure Makes Krumbles",
-    "Score": 86
+    "RK": 11.0,
+    "Team": "Mahomie",
+    "Score": 87
   },
   {
-    "Rank": 12,
-    "Team": "Mahomie",
+    "RK": 12.0,
+    "Team": "Pressure Makes Krumbles",
     "Score": 86
   }
 ]

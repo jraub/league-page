@@ -3,3 +3,6 @@ node_modules
 /.svelte-kit
 /package
 .vercel_build_output*
+.env
+static/smui-dark.css
+static/smui.css

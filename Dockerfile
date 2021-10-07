@@ -1,15 +1,19 @@
-FROM mhart/alpine-node:14
+FROM node:14-alpine
 
-# install dependencies
 WORKDIR /app
+
+# Install required deps
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copy all local files into the image.
+# Copy in source and build the app
 COPY . .
-
-RUN npm rebuild esbuild
-RUN npm run build
+RUN npm run build-docker
 
 EXPOSE 3000
-CMD npm run dev -- --host
+
+# Wrap Node.js with Tini since it wasn't designed to be run as PID 1
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+RUN apk add --no-cache tini
+ENTRYPOINT ["tini", "--"]
+CMD ["node", "./build"]
